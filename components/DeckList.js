@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button, FlatList, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import DeckListItem from './DeckListItem';
 
@@ -29,15 +29,19 @@ const io = {
 	},
 };
 
-export default function DeckList() {
+export default function DeckList({ navigation }) {
 	const decks = useSelector((state) => Object.keys(state.decks));
 	const tempdecks = useSelector((state) => state.decks);
 	return (
 		<View>
 			<Text style={styles.headingText}>Decks</Text>
-			{decks.map((key) => (
-				<DeckListItem key={key} id={key} />
-			))}
+			{/* <FlatList data={decks} renderItem={({ item }) => <DeckListItem key={item} id={item} />} /> */}
+			<ScrollView>
+				{decks.map((key) => (
+					<DeckListItem key={key} id={key} />
+				))}
+			</ScrollView>
+			<Button title='Go to Details' onPress={() => navigation.navigate('TestScreen')} />
 		</View>
 	);
 }
