@@ -8,6 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import DeckListItem from './components/DeckListItem';
 import Home from './components/Home';
+import Deck from './components/Deck';
+import Card from './components/Card';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +17,11 @@ export default function App() {
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<Home />
+				<Stack.Navigator style={styles.container}>
+					<Stack.Screen name='ParentHome' component={Home} options={{ headerShown: false }} />
+					<Stack.Screen name='Deck' component={Deck} />
+					<Stack.Screen name='Card' component={Card} />
+				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
 	);

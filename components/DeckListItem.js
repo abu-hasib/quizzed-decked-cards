@@ -1,18 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { useSelector } from 'react-redux';
 
-export default function DeckListItem({ id }) {
+export default function DeckListItem({ id, navigation }) {
 	const decks = useSelector((state) => state.decks);
+	const cardsCount = useSelector((state) => state.decks[id].questions.length);
+
 	return (
-		<View style={styles.deckList}>
-			<Text>{decks[id].name}</Text>
-		</View>
+		<TouchableHighlight key={id} onPress={() => navigation.navigate('Deck', { id })}>
+			<View style={styles.deckItem}>
+				<Text>{decks[id].title}</Text>
+				<Text>{cardsCount} cards</Text>
+			</View>
+		</TouchableHighlight>
 	);
 }
 
 const styles = StyleSheet.create({
-	deckList: {
+	deckItem: {
 		padding: 30,
 		shadowRadius: 10,
 		backgroundColor: '#eee',
@@ -20,5 +25,16 @@ const styles = StyleSheet.create({
 		shadowColor: '10px 10px 36px 0px rgba(0,0,0,0.75)',
 		borderRadius: 8,
 		alignItems: 'center',
+	},
+	button: {
+		marginBottom: 30,
+		width: 260,
+		alignItems: 'center',
+		backgroundColor: '#2196F3',
+	},
+	buttonText: {
+		textAlign: 'center',
+		padding: 20,
+		color: 'white',
 	},
 });
