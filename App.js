@@ -21,6 +21,8 @@ export default function App() {
 					<Stack.Screen name='ParentHome' component={Home} options={{ headerShown: false }} />
 					<Stack.Screen name='Deck' component={Deck} />
 					<Stack.Screen name='Card' component={Card} />
+					<Stack.Screen name='NewCard' component={Card} />
+					<Stack.Screen name='Quiz' component={Card} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
