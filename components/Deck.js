@@ -1,6 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { useSelector } from 'react-redux';
 
 export default function Deck({ route }) {
@@ -11,8 +13,14 @@ export default function Deck({ route }) {
 
 	return (
 		<View style={styles.container}>
-			<Text>Add Card</Text>
-			<Text>Take Quiz</Text>
+			<View style={styles.tobechange}>
+				<TouchableOpacity onPress={() => navigation.navigate('NewCard', { id })}>
+					<Ionicons name='add-circle-sharp' size='48' />
+				</TouchableOpacity>
+				<TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
+					<Ionicons name='ios-pencil-sharp' size='48' />
+				</TouchableOpacity>
+			</View>
 			<Text style={styles.header}>Title: {decks[id].title}</Text>
 			<View>
 				{questions.map((key, index) => (
@@ -45,5 +53,9 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		fontSize: 24,
+	},
+	tobechange: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
 	},
 });

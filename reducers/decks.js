@@ -1,4 +1,4 @@
-import { ADD_DECK } from '../actions/actionTypes';
+import { ADD_CARD, ADD_DECK } from '../actions/actionTypes';
 
 const initialState = {
 	React: {
@@ -31,6 +31,14 @@ export default function rootReducer(state = initialState, action) {
 		case ADD_DECK:
 			return { ...state, [action.payload.replace(/\s+/g, '')]: { name: action.payload } };
 
+		case ADD_CARD:
+			return {
+				...state,
+				[action.id]: {
+					...state[action.id],
+					questions: [...state[action.id].questions, action.question],
+				},
+			};
 		default:
 			return state;
 	}
