@@ -14,7 +14,7 @@ export default function Deck({ route }) {
 	return (
 		<View style={styles.container}>
 			<View style={styles.tobechange}>
-				<TouchableOpacity onPress={() => navigation.navigate('NewCard')}>
+				<TouchableOpacity onPress={() => navigation.navigate('NewCard', { id })}>
 					<Ionicons name='add-circle-sharp' size='48' />
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
