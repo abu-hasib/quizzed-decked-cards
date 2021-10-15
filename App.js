@@ -11,6 +11,7 @@ import Home from './components/Home';
 import Deck from './components/Deck';
 import Card from './components/Card';
 import NewCard from './components/NewCard';
+import Result from './components/Result';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
 					<Stack.Screen name='Card' component={Card} />
 					<Stack.Screen name='NewCard' component={NewCard} />
 					<Stack.Screen name='Quiz' component={Card} />
+					<Stack.Screen name='Result' component={Result} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
