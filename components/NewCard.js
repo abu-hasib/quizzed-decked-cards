@@ -34,7 +34,7 @@ export default function NewCard({ route }) {
 				value={answer}
 				placeholder='Provide an answer'
 			/>
-			<Pressable style={styles.button} title='Add Card' onPress={handlePress}>
+			<Pressable style={styles.button} onPress={handlePress}>
 				<Text style={styles.text}>Submit</Text>
 			</Pressable>
 		</View>
