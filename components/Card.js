@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -10,6 +10,12 @@ export default function Card({ route }) {
 	const navigation = useNavigation();
 	const [showAnswer, setShowAnswer] = useState(false);
 	const [answersCount, setAnswersCount] = useState(1);
+
+	useEffect(() => {
+		if (!questions[nextQ]) {
+			navigation.goBack();
+		}
+	}, [nextQ]);
 
 	const handlePress = () => {
 		console.log('Pressing');

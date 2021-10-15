@@ -29,7 +29,7 @@ const initialState = {
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_DECK:
-			return { ...state, [action.payload.replace(/\s+/g, '')]: { name: action.payload } };
+			return { ...state, ...action.payload };
 
 		case ADD_CARD:
 			return {

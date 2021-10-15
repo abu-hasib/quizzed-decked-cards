@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import DeckList from './DeckList';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import New from './New';
+import New from './NewDeck';
 
 const Tab = createBottomTabNavigator();
 

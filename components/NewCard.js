@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, Button, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -7,6 +8,7 @@ export default function NewCard({ route }) {
 	const [question, setQuestion] = React.useState('');
 	const [answer, setAnswer] = React.useState('');
 	const dispatch = useDispatch();
+	const navigation = useNavigation();
 
 	const handlePress = () => {
 		const { id } = route.params;
@@ -18,6 +20,7 @@ export default function NewCard({ route }) {
 			},
 		};
 		dispatch(addCard(payload));
+		navigation.goBack();
 	};
 
 	return (
