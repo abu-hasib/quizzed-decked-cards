@@ -1,13 +1,19 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import DeckList from './DeckList';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { handleAppStart } from '../actions';
+import DeckList from './DeckList';
 import New from './NewDeck';
 
 const Tab = createBottomTabNavigator();
 
 export default function Home() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(handleAppStart());
+	}, [dispatch]);
 	return (
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
@@ -28,12 +34,3 @@ export default function Home() {
 		</Tab.Navigator>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		paddingHorizontal: 20,
-		paddingTop: 50,
-	},
-});

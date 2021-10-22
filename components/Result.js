@@ -1,13 +1,13 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function Result({ route }) {
 	const navigation = useNavigation();
 	const { id, answersCount, questions } = route.params;
 	return (
-		<View>
-			<Text>Result</Text>
+		<View style={styles.container}>
+			<Text style={styles.headingText}>Result</Text>
 			<Text>
 				Score: {answersCount}/{questions.length}
 			</Text>
@@ -24,6 +24,12 @@ export default function Result({ route }) {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		paddingHorizontal: 20,
+		paddingTop: 50,
+	},
 	button: {
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -39,10 +45,15 @@ const styles = StyleSheet.create({
 		lineHeight: 21,
 		fontWeight: 'bold',
 		letterSpacing: 0.25,
-		color: 'purple',
+		color: 'black',
 	},
 	choice: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+		marginTop: 48,
+	},
+	headingText: {
+		fontSize: 24,
+		fontWeight: 'bold',
 	},
 });

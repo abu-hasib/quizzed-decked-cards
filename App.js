@@ -1,17 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import DeckList from './components/DeckList';
-import store from './store';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-import DeckListItem from './components/DeckListItem';
-import Home from './components/Home';
-import Deck from './components/Deck';
 import Card from './components/Card';
+import Deck from './components/Deck';
+import Home from './components/Home';
 import NewCard from './components/NewCard';
 import Result from './components/Result';
+import store from './store';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,14 +26,6 @@ export default function App() {
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
-	);
-}
-
-function TestScreen() {
-	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>Details Screen</Text>
-		</View>
 	);
 }
 
