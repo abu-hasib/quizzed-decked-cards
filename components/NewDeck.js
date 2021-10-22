@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -6,12 +7,17 @@ import { addDeck } from '../actions';
 export default function New() {
 	const [text, setText] = React.useState('');
 	const dispatch = useDispatch();
+	const navigation = useNavigation();
 	const handlePress = () => {
 		console.log('handling...');
-		dispatch(addDeck(text));
+		const newDeck = formatDeck(text);
+		console.log('$$$: ', newDeck);
+		dispatch(addDeck(newDeck));
+		navigation.navigate('Deck', { id: text });
 	};
 	return (
 		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<Text>Add Deck</Text>
 			<TextInput
 				style={styles.input}
 				onChangeText={(text) => setText(text)}
@@ -19,7 +25,7 @@ export default function New() {
 				keyboardType='default'
 			/>
 			<Text>{text}</Text>
-			<Button style={styles.button} title='Add Deck' onPress={handlePress} />
+			<Button style={styles.button} title='Create Deck' onPress={handlePress} />
 		</View>
 	);
 }
@@ -38,3 +44,12 @@ const styles = StyleSheet.create({
 		borderWidth: 3,
 	},
 });
+
+function formatDeck(deckname) {
+	return {
+		[deckname]: {
+			title: deckname,
+			questions: [],
+		},
+	};
+}

@@ -16,7 +16,7 @@ export default function Result({ route }) {
 					<Text style={styles.text}>Back to Deck</Text>
 				</Pressable>
 				<Pressable style={styles.button} onPress={() => navigation.navigate('Quiz', { id })}>
-					<Text style={styles.text}>Restart</Text>
+					<Text style={styles.text}>Restart Quiz</Text>
 				</Pressable>
 			</View>
 		</View>

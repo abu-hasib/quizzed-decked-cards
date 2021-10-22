@@ -17,7 +17,9 @@ export default function Deck({ route }) {
 				<TouchableOpacity onPress={() => navigation.navigate('NewCard', { id })}>
 					<Ionicons name='add-circle-sharp' size='48' />
 				</TouchableOpacity>
-				<TouchableOpacity onPress={() => navigation.navigate('Quiz', { id })}>
+				<TouchableOpacity
+					disabled={questions.length === 0}
+					onPress={() => navigation.navigate('Quiz', { id })}>
 					<Ionicons name='ios-pencil-sharp' size='48' />
 				</TouchableOpacity>
 			</View>
