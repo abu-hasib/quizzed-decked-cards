@@ -1,4 +1,4 @@
-import { ADD_CARD, ADD_DECK } from '../actions/actionTypes';
+import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from '../actions/actionTypes';
 
 const initialState = {
 	React: {
@@ -26,6 +26,8 @@ const initialState = {
 	},
 };
 
+// const init = AsyncStorage.setItem('decks', JSON.stringify(initialState));
+
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
 		case ADD_DECK:
@@ -38,6 +40,11 @@ export default function rootReducer(state = initialState, action) {
 					...state[action.id],
 					questions: [...state[action.id].questions, action.question],
 				},
+			};
+		case RECEIVE_DECKS:
+			return {
+				...state,
+				...action.payload,
 			};
 		default:
 			return state;

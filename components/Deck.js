@@ -1,8 +1,7 @@
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
 export default function Deck({ route }) {
@@ -13,21 +12,23 @@ export default function Deck({ route }) {
 
 	return (
 		<View style={styles.container}>
+			<Text style={styles.header}>{decks[id].title}</Text>
 			<View style={styles.tobechange}>
 				<TouchableOpacity onPress={() => navigation.navigate('NewCard', { id })}>
 					<Ionicons name='add-circle-sharp' size='48' />
+					<Text>Add Card</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					disabled={questions.length === 0}
 					onPress={() => navigation.navigate('Quiz', { id })}>
 					<Ionicons name='ios-pencil-sharp' size='48' />
+					<Text>Start Quiz</Text>
 				</TouchableOpacity>
 			</View>
-			<Text style={styles.header}>Title: {decks[id].title}</Text>
 			<View>
 				{questions.map((key, index) => (
-					<TouchableOpacity onPress={() => navigation.navigate('Card', { id })}>
-						<View key={index} style={styles.cardItem}>
+					<TouchableOpacity key={index}>
+						<View style={styles.cardItem}>
 							<Text>{key.question}</Text>
 						</View>
 					</TouchableOpacity>
@@ -55,9 +56,12 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		fontSize: 24,
+		fontWeight: '500',
+		marginBottom: 8,
 	},
 	tobechange: {
 		flexDirection: 'row',
 		justifyContent: 'space-around',
+		marginVertical: 48,
 	},
 });
