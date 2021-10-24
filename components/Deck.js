@@ -25,6 +25,7 @@ export default function Deck({ route }) {
 					<Text>Start Quiz</Text>
 				</TouchableOpacity>
 			</View>
+			<Text style={styles.count}>Cards in this Deck: {questions.length}</Text>
 			<View>
 				{questions.map((key, index) => (
 					<TouchableOpacity key={index}>
@@ -63,5 +64,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		marginVertical: 48,
+	},
+	count: {
+		textAlign: 'center',
+		fontSize: 18,
+		fontWeight: '400',
+		margin: 16,
 	},
 });
