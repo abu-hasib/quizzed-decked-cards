@@ -1,6 +1,6 @@
-import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
-
-const { getItem, setItem, mergeItem } = useAsyncStorage;
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import * as Notifications from 'expo-notifications';
+const { getItem, setItem, mergeItem } = useAsyncStorage('decks');
 
 export async function _getDecks() {
 	// AsyncStorage.clear();
@@ -44,3 +44,18 @@ function formatDeck(deckname) {
 		},
 	};
 }
+
+let trigger = new Date();
+trigger.setDate(trigger.getDate() + 1);
+trigger.setHours(0);
+trigger.setMinutes(0);
+
+export const sendNotification = async () => {
+	let notificationId = await Notifications.scheduleNotificationAsync({
+		content: {
+			title: 'FlashCards',
+			body: "Don't forget to take a quiz",
+		},
+		trigger,
+	});
+};

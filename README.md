@@ -18,6 +18,10 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:19006](http://localhost:19006) to view it in the browser.
 
+## Devices
+
+The app should work without issues on both Android and iOS but it is only tested on iOS
+
 AsyncStorage communicates with the database via 4 methods:
 
 - `_getDecks()`
