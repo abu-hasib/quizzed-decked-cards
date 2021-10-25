@@ -1,34 +1,53 @@
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 
-export default function Card({ route }) {
-	const { id } = route.params;
+const Card = (props) => {
+	const { id } = props.route.params;
 	const questions = useSelector((state) => state.decks[id].questions);
 	const [nextQ, setNextQ] = useState(0);
 	const navigation = useNavigation();
 	const [showAnswer, setShowAnswer] = useState(false);
-	const [answersCount, setAnswersCount] = useState(1);
+	const [index, setIndex] = React.useState(0);
+	const [completed, setCompleted] = React.useState(false);
+
+	const [correctAnswers, setCorrectAnswers] = useState(0);
+	const [wrongAnswers, setWrongAnswers] = useState(0);
 
 	useEffect(() => {
+		console.log('leaving');
 		if (!questions[nextQ]) {
 			navigation.goBack();
 		}
-	}, [nextQ]);
-
-	const handlePress = () => {
-		console.log('Pressing');
-		// nextQ < questions.length - 1 ? setNextQ
-		if (nextQ < questions.length - 1) {
-			setNextQ(nextQ + 1);
-			setAnswersCount(answersCount + 1);
-		} else {
-			setNextQ(0);
-			// setAnswersCount(answersCount + 1);
-			navigation.navigate('Result', { id, questions, answersCount });
+		if (completed) {
+			tidyUp();
 		}
-	};
+	}, [completed]);
+
+	// console.log('£££: ', answer);
+
+	function tidyUp() {
+		console.log('tidying...');
+		setCorrectAnswers(0);
+		setWrongAnswers(0);
+		setNextQ(0);
+		setIndex(0);
+		setCompleted(false);
+		navigation.navigate('Result', { id, questions, correctAnswers, wrongAnswers });
+	}
+
+	function next() {
+		if (index + 1 !== questions.length) {
+			setIndex(index + 1);
+		} else {
+			setIndex(index);
+			console.log('user completed quiz');
+			setCompleted(true);
+		}
+	}
+
 	{
 		return showAnswer ? (
 			<View style={styles.container}>
@@ -43,9 +62,11 @@ export default function Card({ route }) {
 		) : (
 			<View style={styles.container}>
 				<View style={styles.card}>
-					<Text style={styles.question}>{questions[nextQ].question}</Text>
+					<Text>{correctAnswers}</Text>
+					<Text>{wrongAnswers}</Text>
+					<Text style={styles.question}>{questions[index].question}</Text>
 					<Text>
-						{nextQ + 1} / {questions.length}
+						{index + 1} / {questions.length}
 					</Text>
 					<Pressable style={styles.button} onPress={() => setShowAnswer(!showAnswer)}>
 						<Text style={[styles.text, styles.show]}>Show Answer</Text>
@@ -53,10 +74,18 @@ export default function Card({ route }) {
 					<View style={styles.choice}>
 						<Pressable
 							style={[styles.button, styles.incorrect]}
-							onPress={() => setShowAnswer(!showAnswer)}>
+							onPress={() => {
+								next();
+								setWrongAnswers(wrongAnswers + 1);
+							}}>
 							<Text style={styles.text}>Incorrect</Text>
 						</Pressable>
-						<Pressable style={[styles.button, styles.correct]} onPress={handlePress}>
+						<Pressable
+							style={[styles.button, styles.correct]}
+							onPress={() => {
+								next();
+								setCorrectAnswers(correctAnswers + 1);
+							}}>
 							<Text style={styles.text}>Correct</Text>
 						</Pressable>
 					</View>
@@ -64,7 +93,7 @@ export default function Card({ route }) {
 			</View>
 		);
 	}
-}
+};
 
 const styles = StyleSheet.create({
 	container: {
@@ -116,3 +145,5 @@ const styles = StyleSheet.create({
 		alignItems: 'baseline',
 	},
 });
+
+export default Card;

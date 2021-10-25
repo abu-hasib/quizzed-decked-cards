@@ -1,26 +1,35 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function Result({ route }) {
 	const navigation = useNavigation();
-	const { id, answersCount, questions } = route.params;
+	const { id, correctAnswers, wrongAnswers } = route.params;
+
+	const handlePress = () => {
+		navigation.navigate('Quiz', { id });
+	};
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headingText}>Result</Text>
-			<Text>
-				Score: {answersCount}/{questions.length}
-			</Text>
+			<Text>Correct: {correctAnswers}</Text>
+			<Text>Wrong: {wrongAnswers}</Text>
 			<View style={styles.choice}>
 				<Pressable style={styles.button} onPress={() => navigation.navigate('Deck', { id })}>
 					<Text style={styles.text}>Back to Deck</Text>
 				</Pressable>
-				<Pressable style={styles.button} onPress={() => navigation.navigate('Quiz', { id })}>
+				<Pressable style={styles.button} onPress={handlePress}>
 					<Text style={styles.text}>Restart Quiz</Text>
 				</Pressable>
 			</View>
 		</View>
 	);
+}
+
+async function ans() {
+	return await AsyncStorage.getItem('result');
 }
 
 const styles = StyleSheet.create({

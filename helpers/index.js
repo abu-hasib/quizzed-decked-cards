@@ -1,6 +1,6 @@
 import AsyncStorage, { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
-const { getItem, setItem, mergeItem } = useAsyncStorage;
+const { getItem, setItem, mergeItem } = useAsyncStorage('decks');
 
 export async function _getDecks() {
 	// AsyncStorage.clear();
