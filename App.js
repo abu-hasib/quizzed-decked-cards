@@ -1,18 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import Card from './components/Card';
 import Deck from './components/Deck';
 import Home from './components/Home';
 import NewCard from './components/NewCard';
 import Result from './components/Result';
+import { sendNotification } from './helpers';
 import store from './store';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+	useEffect(() => {
+		sendNotification();
+	}, []);
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
@@ -35,7 +39,5 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		paddingHorizontal: 20,
 		paddingTop: 50,
-		// alignItems: 'center',
-		// justifyContent: 'center',
 	},
 });

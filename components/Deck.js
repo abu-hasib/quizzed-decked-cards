@@ -15,13 +15,13 @@ export default function Deck({ route }) {
 			<Text style={styles.header}>{decks[id].title}</Text>
 			<View style={styles.tobechange}>
 				<TouchableOpacity onPress={() => navigation.navigate('NewCard', { id })}>
-					<Ionicons name='add-circle-sharp' size='48' />
+					<Ionicons name='add-circle-sharp' style={styles.icon} />
 					<Text>Add Card</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
 					disabled={questions.length === 0}
 					onPress={() => navigation.navigate('Quiz', { id })}>
-					<Ionicons name='ios-pencil-sharp' size='48' />
+					<Ionicons name='ios-pencil-sharp' style={styles.icon} />
 					<Text>Start Quiz</Text>
 				</TouchableOpacity>
 			</View>
@@ -70,5 +70,8 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		fontWeight: '400',
 		margin: 16,
+	},
+	icon: {
+		fontSize: 48,
 	},
 });

@@ -10,8 +10,8 @@ const Card = (props) => {
 	const [nextQ, setNextQ] = useState(0);
 	const navigation = useNavigation();
 	const [showAnswer, setShowAnswer] = useState(false);
-	const [index, setIndex] = React.useState(0);
-	const [completed, setCompleted] = React.useState(false);
+	const [index, setIndex] = useState(0);
+	const [completed, setCompleted] = useState(false);
 
 	const [correctAnswers, setCorrectAnswers] = useState(0);
 	const [wrongAnswers, setWrongAnswers] = useState(0);
